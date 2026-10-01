@@ -1,0 +1,14 @@
+.settings-page{min-height:100vh;background:#f3e6cf}
+.settings-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,3rem);background:rgba(251,241,222,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(51,39,31,.08)}
+.settings-actions{display:flex;align-items:center;gap:1rem}
+.settings-shell{width:min(1180px,calc(100% - 2rem));margin:0 auto;padding:4rem 0 5rem}
+.settings-intro{margin-bottom:2rem;max-width:760px}.settings-intro h1{font-size:clamp(2.2rem,5vw,4.3rem);margin:.45rem 0 .75rem}.settings-intro>p:last-of-type{color:#66594d}
+.save-status{margin-top:1rem;min-height:1.4rem;color:#8a4f2e;font-size:.9rem}
+.settings-card{background:rgba(255,249,237,.82);border:1px solid rgba(51,39,31,.08);border-radius:20px;padding:1.4rem;margin-top:1rem;box-shadow:0 22px 55px -45px rgba(40,25,15,.42)}
+.settings-head{margin-bottom:1rem}.settings-head h2{font-size:1.65rem}.settings-head p{color:#6c5f54;margin-top:.3rem}
+.grid{display:grid;gap:1rem}.grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid--4{grid-template-columns:repeat(4,minmax(0,1fr))}.span-2{grid-column:span 2}.span-3{grid-column:span 3}
+label{display:grid;gap:.4rem;font-size:.85rem;font-weight:600;color:#54473d}input,textarea{width:100%;border:1px solid rgba(51,39,31,.16);border-radius:12px;padding:.8rem .85rem;background:#fffaf0;color:#2f261f;outline:none}textarea{resize:vertical;min-height:90px}input:focus,textarea:focus{border-color:#c85d32;box-shadow:0 0 0 3px rgba(200,93,50,.1)}
+input[type=color]{padding:.2rem;height:44px}
+.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(51,39,31,.16);border-radius:999px;background:#fffaf0;color:#33271f;padding:.65rem 1rem;font-weight:650;cursor:pointer}.button--primary{border-color:#c85d32;background:#c85d32;color:#fff}.button--danger{background:#fff3ef;color:#9b4328;border-color:#e4b8aa}
+.settings-tools{margin-top:1rem;padding:1.4rem;border-radius:20px;background:#2f2924;color:#fff}.settings-tools h2{font-size:1.5rem}.settings-tools p{opacity:.72;margin-top:.3rem}.tool-row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
+@media(max-width:760px){.grid--2,.grid--3,.grid--4{grid-template-columns:1fr}.span-2,.span-3{grid-column:auto}.settings-actions .text-link{display:none}.settings-shell{width:min(100% - 1rem,680px);padding-top:2rem}}

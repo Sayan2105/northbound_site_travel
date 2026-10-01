@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fbf1de">
+  <title>Northbound | Slow roads, big skies</title>
+  <meta name="description" content="Slow, story-rich motorcycle and SUV journeys through the Himalayas, Ladakh, Himachal and North India. Explore routes and plan a journey with Northbound.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="./">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Northbound | Slow roads, big skies">
+  <meta property="og:description" content="Motorcycle and SUV journeys through the Himalayas and North India.">
+  <meta property="og:image" content="assets/img/redfort-full.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" as="image" href="assets/img/redfort-full.webp" type="image/webp">
+  <link rel="stylesheet" href="css/styles.css">
+  <script id="site-schema" type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TravelAgency",
+    "name":"Northbound",
+    "description":"Motorcycle and SUV journeys through the Himalayas, Ladakh, Himachal and North India.",
+    "areaServed":["Ladakh","Himachal Pradesh","Uttarakhand","Delhi","North India"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#journey">Skip to journeys</a>
+
+  <header class="nav" id="site-nav">
+    <a class="brand" href="#top" data-bind="brand">Northbound</a>
+    <nav aria-label="Main navigation">
+      <a href="#journey" data-bind="navDestinations">Journeys</a>
+      <a href="#contact" data-bind="navStories">Contact</a>
+    </nav>
+    <a class="pill pill--small" href="#contact" data-bind-href="navCtaHref" data-bind="navCta">Plan a trip</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO / EXISTING REFERENCE WORLD -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-stage">
+        <picture class="hero-bg" aria-hidden="true">
+          <source media="(max-width: 700px)" srcset="assets/img/mobile/redfort-full-phone.webp">
+          <img src="assets/img/redfort-full.webp" alt="" width="1610" height="692" fetchpriority="high">
+        </picture>
+
+        <div class="hero-paper"></div>
+        <div class="hero-vignette"></div>
+
+        <div class="ambient cloud cloud--h1" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179"></div>
+        <div class="ambient cloud cloud--h2" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179"></div>
+        <div class="ambient cloud cloud--h3" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179"></div>
+        <div class="bird-flock" data-birds="hero" aria-hidden="true"></div>
+
+        <!-- Kept in the same layered-monument spirit as the reference. Hawa Mahal intentionally absent. -->
+        <div class="hero-cutout hero-cutout--taj" data-depth=".16"><img src="assets/img/taj.webp" alt="" width="834" height="620"></div>
+        <div class="hero-cutout hero-cutout--qutub" data-depth=".26"><img src="assets/img/qutub.webp" alt="Qutub Minar illustration" width="74" height="340"></div>
+        <div class="hero-cutout hero-cutout--kedar" data-depth=".20"><img src="assets/img/kedar.webp" alt="Himalayan temple illustration" width="287" height="340"></div>
+
+        <div class="hero-copy">
+          <p class="eyebrow" data-bind="heroEyebrow">Chapter one</p>
+          <h1 id="hero-title" data-bind="heroTitle">Some roads are meant to be felt.</h1>
+          <p class="tagline" data-bind="heroTagline">Slow roads. Big skies.</p>
+          <a class="pill pill--large" data-bind-href="heroCtaHref" href="#journey" data-bind="heroCta">Plan a trip</a>
+          <span class="scroll-cue">Scroll to travel</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NORMAL COUPLED SECTION: two scenes, backgrounds change vertically. -->
+    <section class="coupled" id="journey" aria-label="Green Valley and Rishikesh journey">
+      <div class="coupled-stage">
+        <article class="coupled-scene coupled-scene--green">
+          <picture class="coupled-bg">
+            <source media="(max-width: 700px)" srcset="assets/img/mobile/green-valley-phone.webp">
+            <img src="assets/img/green-valley.webp" alt="Misty green Himalayan valley and forest road" width="1634" height="686" loading="lazy" decoding="async">
+          </picture>
+          <div class="scene-wash"></div>
+          <div class="scene-cloud scene-cloud--a" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+          <div class="scene-cloud scene-cloud--b" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+          <div class="bird-flock" data-birds="green" aria-hidden="true"></div>
+          <div class="leaves" data-leaf-count="10" aria-hidden="true"></div>
+          <div class="scene-copy scene-copy--left">
+            <p class="eyebrow" data-bind="j0Eyebrow">Chapter two</p>
+            <h2 data-bind="j0Title">Into the green</h2>
+            <p data-bind="j0Body">Pine forests, wet roads and mist that opens like a curtain. The first hours of the climb are the quietest.</p>
+          </div>
+        </article>
+
+        <article class="coupled-scene coupled-scene--river">
+          <picture class="coupled-bg">
+            <source media="(max-width: 700px)" srcset="assets/img/mobile/rishikesh-phone.webp">
+            <img src="assets/img/rishikesh.webp" alt="Rishikesh suspension bridge and riverfront" width="1780" height="722" loading="lazy" decoding="async">
+          </picture>
+          <div class="scene-wash"></div>
+          <div class="scene-cloud scene-cloud--c" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+          <div class="bird-flock" data-birds="river" aria-hidden="true"></div>
+          <div class="leaves" data-leaf-count="6" aria-hidden="true"></div>
+          <div class="scene-copy scene-copy--right">
+            <p class="eyebrow" data-bind="j1Eyebrow">Chapter three</p>
+            <h2 data-bind="j1Title">Where the river turns holy</h2>
+            <p data-bind="j1Body">Rishikesh, suspension bridges, evening aarti and a slow breakfast by the Ganga before the road climbs again.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SPECIAL BIKE JOURNEY: fixed background, moving bike + moving/revealed cards. -->
+    <section class="ride" id="bike-ride" data-ride="bike" aria-label="Motorcycle journey through the green valley">
+      <div class="ride-stage">
+        <picture class="ride-bg">
+          <source media="(max-width: 700px)" srcset="assets/img/mobile/green-valley-phone.webp">
+          <img src="assets/img/green-valley.webp" alt="Green Himalayan valley used as the fixed stage for a motorcycle journey" width="1634" height="686" loading="lazy" decoding="async">
+        </picture>
+        <div class="ride-wash"></div>
+        <div class="ride-atmosphere"></div>
+
+        <div class="ride-cloud cloud cloud--r1" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+        <div class="ride-cloud cloud cloud--r2" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+        <div class="bird-flock" data-birds="bike" aria-hidden="true"></div>
+        <div class="leaves" data-leaf-count="14" aria-hidden="true"></div>
+
+        <div class="ride-content">
+          <article class="journey-card journey-card--bike card-1">
+            <p class="eyebrow">The road opens</p>
+            <h2>Leave room for the quiet.</h2>
+            <p>Forest road, cool air and a full tank. This is where the motorcycle chapter begins.</p>
+          </article>
+          <article class="journey-card journey-card--bike card-2">
+            <p class="eyebrow">Take the long way</p>
+            <h2>Every bend gets a view.</h2>
+            <p>Slow down before the climb. The best part is often the road between the places.</p>
+          </article>
+          <article class="journey-card journey-card--bike card-3">
+            <p class="eyebrow">Northbound</p>
+            <h2>Keep following the mountains.</h2>
+            <p>A journey designed to feel unhurried, personal and made for the people riding it.</p>
+          </article>
+        </div>
+
+        <div class="vehicle vehicle--bike" aria-hidden="true">
+          <span class="vehicle-shadow"></span>
+          <img src="assets/img/bike.webp" alt="" width="536" height="466" loading="lazy" decoding="async">
+        </div>
+        <div class="vehicle-dust vehicle-dust--bike" aria-hidden="true"></div>
+        <div class="ride-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <!-- NORMAL COUPLED SECTION: Ladakh -> Chandratal -->
+    <section class="coupled coupled--high" aria-label="Ladakh and Chandratal journey">
+      <div class="coupled-stage">
+        <article class="coupled-scene coupled-scene--ladakh">
+          <picture class="coupled-bg">
+            <source media="(max-width: 700px)" srcset="assets/img/mobile/ladakh-mountain-phone.webp">
+            <img src="assets/img/ladakh-mountain.webp" alt="High Ladakh mountain road and monastery" width="1654" height="688" loading="lazy" decoding="async">
+          </picture>
+          <div class="scene-wash"></div>
+          <div class="scene-cloud scene-cloud--a" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+          <div class="bird-flock" data-birds="ladakh" aria-hidden="true"></div>
+          <div class="snow" data-snow-count="24" aria-hidden="true"></div>
+          <div class="scene-copy scene-copy--left">
+            <p class="eyebrow">Higher roads</p>
+            <h2>Where the valley gets wide.</h2>
+            <p>Stone, sky and long empty stretches. The Himalayas start to feel larger than the map.</p>
+          </div>
+        </article>
+
+        <article class="coupled-scene coupled-scene--chandra">
+          <picture class="coupled-bg">
+            <source media="(max-width: 700px)" srcset="assets/img/mobile/chandratal-phone.webp">
+            <img src="assets/img/chandratal.webp" alt="Chandratal lake under a night sky in the Himalayas" width="1734" height="706" loading="lazy" decoding="async">
+          </picture>
+          <div class="scene-wash"></div>
+          <div class="scene-cloud scene-cloud--c" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+          <div class="snow" data-snow-count="20" aria-hidden="true"></div>
+          <div class="scene-copy scene-copy--right scene-copy--light">
+            <p class="eyebrow">Under the stars</p>
+            <h2>Blue at the end of the road.</h2>
+            <p>A long blue lake, cold wind and a camp pitched before the last light leaves the mountains.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SPECIAL SUV JOURNEY: fixed Ladakh background, moving SUV + cards. -->
+    <section class="ride ride--suv" id="suv-ride" data-ride="suv" aria-label="SUV journey through Ladakh">
+      <div class="ride-stage">
+        <picture class="ride-bg">
+          <source media="(max-width: 700px)" srcset="assets/img/mobile/ladakh-mountain-phone.webp">
+          <img src="assets/img/ladakh-mountain.webp" alt="Ladakh mountain landscape used as the fixed stage for an SUV journey" width="1654" height="688" loading="lazy" decoding="async">
+        </picture>
+        <div class="ride-wash"></div>
+        <div class="ride-atmosphere"></div>
+
+        <div class="ride-cloud cloud cloud--r3" aria-hidden="true"><img src="assets/img/cloud.webp" alt="" width="420" height="179" loading="lazy"></div>
+        <div class="bird-flock" data-birds="suv" aria-hidden="true"></div>
+        <div class="snow" data-snow-count="28" aria-hidden="true"></div>
+
+        <div class="ride-content">
+          <article class="journey-card journey-card--suv card-1">
+            <p class="eyebrow">Made for the high country</p>
+            <h2>Carry the camp. Take the road.</h2>
+            <p>The SUV gives the journey space for longer days, colder nights and the things worth bringing along.</p>
+          </article>
+          <article class="journey-card journey-card--suv card-2">
+            <p class="eyebrow">Across Ladakh</p>
+            <h2>The road is the destination.</h2>
+            <p>Monastery walls, exposed passes and empty bends. No rush to get through any of it.</p>
+          </article>
+          <article class="journey-card journey-card--suv card-3">
+            <p class="eyebrow">Stay a little longer</p>
+            <h2>Watch the light change.</h2>
+            <p>Arrive before sunset. Sit still. Let the mountain do the rest.</p>
+          </article>
+        </div>
+
+        <div class="vehicle vehicle--suv" aria-hidden="true">
+          <span class="vehicle-shadow"></span>
+          <img src="assets/img/suv.webp" alt="" width="536" height="466" loading="lazy" decoding="async">
+        </div>
+        <div class="vehicle-dust vehicle-dust--suv" aria-hidden="true"></div>
+        <div class="ride-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <section class="roads" id="stories" aria-labelledby="roads-title">
+      <div class="roads-inner">
+        <div>
+          <p class="eyebrow">The roads between chapters</p>
+          <h2 id="roads-title">More ways north.</h2>
+        </div>
+        <div class="roads-grid">
+          <article><h3 data-bind="road0Title">Manali</h3><p data-bind="road0Body">Pine forests, river bends and mountain air.</p></article>
+          <article><h3 data-bind="road1Title">Ladakh</h3><p data-bind="road1Body">High passes, monasteries and enormous skies.</p></article>
+          <article><h3 data-bind="road2Title">North India</h3><p data-bind="road2Body">A slower route through places with history behind them.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
+        <div class="contact-art" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 700px)" srcset="assets/img/mobile/manali-phone.webp">
+            <img src="assets/img/manali.webp" alt="" width="1782" height="724" loading="lazy" decoding="async" data-bind-src="contactDesktop">
+          </picture>
+          <div class="contact-art-wash"></div>
+        </div>
+        <div class="contact-copy">
+          <p class="eyebrow" data-bind="contactEyebrow">The last page</p>
+          <h2 id="contact-title" data-bind="contactTitle">Let's plan the road.</h2>
+          <p data-bind="contactBody">Tell us where you want to go, when you want to leave and how you want the journey to feel. We will shape the route with you.</p>
+          <div class="contact-actions">
+            <a class="pill pill--large" href="https://wa.me/919800000000" target="_blank" rel="noopener" data-bind-href="contactHref" data-bind="contactCta">Talk on WhatsApp</a>
+            <a class="text-link" href="https://instagram.com/" target="_blank" rel="noopener" data-bind-href="instagram">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
