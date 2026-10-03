@@ -13,7 +13,7 @@
 
 *{box-sizing:border-box;margin:0}
 html{background:var(--paper);scroll-behavior:smooth}
-body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:none}
 a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit}
@@ -25,21 +25,41 @@ button,input,textarea{font:inherit}
 .nav>*{pointer-events:auto}
 .brand{font:500 1.35rem/1 var(--heading);letter-spacing:.03em}
 .nav nav{display:flex;gap:1.7rem;font-size:.9rem;color:var(--muted)}
+.nav nav a{padding:.45rem 0}
+.nav-toggle{display:none}
 .pill{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;padding:.66rem 1.2rem;border-radius:999px;font-size:.9rem;font-weight:650;box-shadow:0 10px 25px -15px var(--accent);transition:transform .35s ease,background .35s ease}
 .pill:hover{transform:translateY(-2px);background:var(--accent-dark)}
 .pill--small{padding:.58rem 1.08rem}
 .pill--large{padding:.82rem 1.5rem;font-size:1rem}
-.text-link{font-weight:600;text-decoration:underline;text-underline-offset:4px}
-@media(max-width:700px){.nav nav{display:none}.nav{padding-left:1rem;padding-right:1rem}.brand{font-size:1.15rem}.pill--small{font-size:.78rem;padding:.52rem .85rem}}
+.text-link{padding:.5rem 0;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){
+  .nav{gap:.5rem;padding-left:1rem;padding-right:1rem}
+  .brand{margin-right:auto;font-size:1.15rem}
+  .pill--small{min-height:44px;font-size:.82rem;padding:.5rem .95rem}
+  /* Links move into a dropdown panel opened by .nav-toggle */
+  .nav nav{position:absolute;top:calc(100% - .25rem);left:1rem;right:1rem;flex-direction:column;gap:0;padding:.4rem;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid rgba(51,39,31,.1);border-radius:18px;box-shadow:0 20px 45px -30px rgba(30,20,14,.55);opacity:0;visibility:hidden;transform:translateY(-.4rem);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+  .nav.is-open nav{opacity:1;visibility:visible;transform:none}
+  .nav nav a{padding:.8rem 1rem;border-radius:12px}
+  .nav-toggle{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;color:var(--ink);background:rgba(251,241,222,.72);border:1px solid rgba(51,39,31,.16);border-radius:50%;cursor:pointer}
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{display:block;width:18px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,background .2s ease}
+  .nav-toggle span{position:relative}
+  .nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0}
+  .nav-toggle span::before{top:-6px}
+  .nav-toggle span::after{top:6px}
+  .nav.is-open .nav-toggle span{background:transparent}
+  .nav.is-open .nav-toggle span::before{transform:translateY(6px) rotate(45deg)}
+  .nav.is-open .nav-toggle span::after{transform:translateY(-6px) rotate(-45deg)}
+}
 
 .eyebrow{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;opacity:.75}
-h1,h2,h3{font-family:var(--heading);font-weight:500;line-height:1.04}
-h1{font-size:clamp(2.5rem,6vw,5.6rem)}
+h1,h2,h3{font-family:var(--heading);font-weight:500;line-height:1.04;overflow-wrap:break-word}
+/* svh term only bites on short screens (landscape phones, short laptops) */
+h1{font-size:clamp(2.5rem,min(6vw,12svh),5.6rem)}
 h2{font-size:clamp(2rem,4.5vw,4rem)}
 
 /* Hero: retain the layered watercolor spirit */
 .hero{position:relative;height:300svh}
-.hero-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:linear-gradient(180deg,#fbefdc 0%,#efd9b9 72%,var(--paper) 100%)}
+.hero-stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:linear-gradient(180deg,#fbefdc 0%,#efd9b9 72%,var(--paper) 100%)}
 .hero-bg{position:absolute;inset:auto 0 0;height:72%;z-index:2;overflow:hidden;display:block}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center bottom}
 .hero-paper{position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(251,241,222,.98) 0 17%,rgba(251,241,222,.22) 48%,rgba(251,241,222,.05) 78%,rgba(251,241,222,.15) 100%)}
@@ -53,9 +73,10 @@ h2{font-size:clamp(2rem,4.5vw,4rem)}
 .hero-cutout{position:absolute;z-index:12;pointer-events:none;will-change:transform}
 .hero-cutout img{width:100%;height:auto}
 .hero-cutout--taj{left:9%;bottom:14%;width:clamp(190px,23vw,380px);opacity:.45}
-.hero-cutout--qutub{left:8%;bottom:18%;height:45svh}.hero-cutout--qutub img{height:100%;width:auto}
-.hero-cutout--kedar{right:11%;bottom:16%;height:33svh}.hero-cutout--kedar img{height:100%;width:auto}
-.hero-copy{position:absolute;z-index:40;left:50%;top:19%;transform:translateX(-50%);width:min(92vw,930px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
+/* vw caps keep the tall cutouts in proportion on portrait tablets; landscape screens hit the svh value */
+.hero-cutout--qutub{left:8%;bottom:18%;height:min(45svh,48vw)}.hero-cutout--qutub img{height:100%;width:auto}
+.hero-cutout--kedar{right:11%;bottom:16%;height:min(33svh,36vw)}.hero-cutout--kedar img{height:100%;width:auto}
+.hero-copy{position:absolute;z-index:40;left:50%;top:max(19%,calc(var(--nav-height) + env(safe-area-inset-top)));transform:translateX(-50%);width:min(92vw,930px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
 .hero-copy::before{content:"";position:absolute;inset:-22% -10%;z-index:-1;background:radial-gradient(ellipse,rgba(251,241,222,.9),rgba(251,241,222,0) 72%)}
 .tagline{font-size:clamp(1rem,1.6vw,1.25rem);color:var(--muted)}
 .scroll-cue{margin-top:.45rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.65;animation:bob 3s ease-in-out infinite}
@@ -63,9 +84,9 @@ h2{font-size:clamp(2rem,4.5vw,4rem)}
 
 /* Normal coupled scenes: fixed/sticky background changes vertically */
 .coupled{position:relative;height:205svh}
-.coupled-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--paper)}
+.coupled-stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:var(--paper)}
 .coupled-scene{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden}
-.coupled-scene--green{opacity:1;visibility:visible}
+.coupled-scene:first-child{opacity:1;visibility:visible}
 .coupled-bg{position:absolute;inset:0;display:block}
 .coupled-bg img{width:100%;height:100%;object-fit:cover}
 .scene-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,33,27,.06),rgba(22,33,27,.18) 70%,rgba(18,19,18,.15))}
@@ -99,8 +120,9 @@ h2{font-size:clamp(2rem,4.5vw,4rem)}
 @keyframes snowFall{0%{translate:0 -8vh;opacity:0}12%{opacity:.85}55%{translate:var(--drift) 54vh}100%{translate:calc(var(--drift) * -.7) 112vh;opacity:.05}}
 
 /* Special ride: one fixed stage, moving bike/SUV and cards only */
-.ride{position:relative;height:430svh}
-.ride-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#d8cfb8}
+/* --card-stagger (vh) and --vehicle-end (vw) are read by setupRide() in main.js */
+.ride{position:relative;height:430svh;--card-stagger:4;--vehicle-end:80}
+.ride-stage{position:sticky;top:0;height:100dvh;overflow:hidden;background:#d8cfb8}
 .ride-bg{position:absolute;inset:0;z-index:1;display:block}
 .ride-bg img{width:100%;height:100%;object-fit:cover}
 .ride-wash{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(13,22,17,.05),rgba(13,19,16,.12) 65%,rgba(14,15,13,.24))}
@@ -110,8 +132,9 @@ h2{font-size:clamp(2rem,4.5vw,4rem)}
 .cloud--r1{top:10%;left:0;opacity:.72}.cloud--r1 img{animation-duration:175s;animation-delay:-80s}
 .cloud--r2{top:31%;left:0;opacity:.58}.cloud--r2 img{animation-duration:240s;animation-delay:-175s}
 .cloud--r3{top:14%;left:0;opacity:.45}.cloud--r3 img{animation-duration:220s;animation-delay:-140s}
-.ride-content{position:absolute;inset:0;z-index:30;pointer-events:none}
-.journey-card{position:absolute;width:min(78vw,390px);padding:1.35rem 1.45rem;background:rgba(255,248,235,.9);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(7px);border-radius:18px;box-shadow:0 25px 60px -40px rgba(16,13,9,.6);opacity:0;will-change:transform,opacity}
+/* Cards sit above the vehicle (z 45) so the bike/SUV never covers their text */
+.ride-content{position:absolute;inset:0;z-index:50;pointer-events:none}
+.journey-card{position:absolute;left:0;top:min(58%,calc(100% - 17rem));width:min(78vw,390px);padding:1.35rem 1.45rem;background:rgba(255,248,235,.9);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(7px);border-radius:18px;box-shadow:0 25px 60px -40px rgba(16,13,9,.6);opacity:0;will-change:transform,opacity}
 .journey-card h2{font-size:clamp(1.6rem,3vw,2.5rem);margin:.38rem 0 .55rem}
 .journey-card p:last-child{color:var(--muted)}
 .journey-card--bike{color:var(--ink)}
@@ -132,13 +155,15 @@ h2{font-size:clamp(2rem,4.5vw,4rem)}
 /* Static SEO content and contact */
 .roads{padding:8rem clamp(1.2rem,6vw,7rem);background:var(--paper)}
 .roads-inner{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:4rem;align-items:start;max-width:1200px;margin:0 auto}
-.roads-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.roads-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
 .roads-grid article{padding:1.4rem;border-top:1px solid rgba(51,39,31,.22)}
 .roads-grid h3{font-size:1.55rem;margin-bottom:.4rem}
 .roads-grid p{color:var(--muted)}
 .contact{min-height:100svh;position:relative;background:var(--paper-deep);display:grid;place-items:center;overflow:hidden}
-.contact-inner{position:relative;width:min(1200px,100%);min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;align-items:end}
-.contact-art{position:absolute;inset:0 auto 0 0;width:68%;overflow:hidden}
+.contact-inner{width:min(1200px,100%);min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;align-items:end}
+/* Positioned against full-width .contact so the art bleeds to the left edge on wide screens;
+   its right edge stays where 68% of the 1200px container put it (identical at <=1200px). */
+.contact-art{position:absolute;inset:0 auto 0 0;width:calc(50% + min(216px,18%));overflow:hidden}
 .contact-art picture,.contact-art img{width:100%;height:100%;display:block}
 .contact-art img{object-fit:cover;object-position:left bottom;opacity:.72}
 .contact-art-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(242,223,193,0) 0 35%,rgba(242,223,193,.9) 100%)}
@@ -147,29 +172,60 @@ h2{font-size:clamp(2rem,4.5vw,4rem)}
 .contact-copy>p:not(.eyebrow){max-width:520px;color:var(--muted);font-size:1.04rem}
 .contact-actions{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:1.7rem}
 
+/* Tablet and below: the side-by-side roads layout leaves ~120px text columns, so stack the intro above the grid */
+@media(max-width:1100px){
+  .roads-inner{grid-template-columns:1fr;gap:2.4rem}
+}
+
+/* Portrait tablets and phones: the two-column contact squeezes copy into a ~360px strip, so stack art over copy */
+@media(max-width:900px){
+  .contact-inner{display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch}
+  .contact-art{width:100%;height:58%}
+  .contact-art-wash{background:linear-gradient(180deg,rgba(242,223,193,.05),rgba(242,223,193,.95) 78%)}
+  .contact-copy{padding:48svh clamp(1.2rem,6vw,4rem) 8svh}
+}
+
+/* Portrait tablets: the stage is tall, so lift the cards into the open sky and give the vehicle more presence */
+@media(min-width:701px) and (orientation:portrait){
+  .journey-card{top:30%}
+  .vehicle{width:clamp(240px,46vw,510px)}
+}
+
 /* Mobile */
 @media(max-width:700px){
   .hero{height:235svh}
   .hero-bg{height:80%}
   .hero-bg img{object-position:55% bottom}
-  .hero-copy{top:15%;width:90vw}
-  .hero-cutout--taj{left:-4%;bottom:10%;width:45vw;opacity:.28}
+  .hero-copy{top:max(15%,calc(var(--nav-height) + env(safe-area-inset-top)));width:90vw}
+  .hero-cutout--taj{left:-4%;bottom:10%;width:min(45vw,40svh);opacity:.28}
   .hero-cutout--qutub{left:1%;bottom:13%;height:32svh}
   .hero-cutout--kedar{right:0;bottom:12%;height:25svh}
-  .coupled{height:205svh}
   .scene-copy{width:min(90vw,360px);padding:1.15rem 1.15rem}
   .scene-copy--left,.scene-copy--right{left:50%;right:auto;bottom:9%;transform:translateX(-50%)}
-  .vehicle{width:clamp(200px,70vw,340px);bottom:12%}
+  /* Cards are centred by main.js and rest in the upper band; the vehicle owns the bottom band */
+  .ride{--card-stagger:0;--vehicle-end:68}
+  .vehicle{width:min(70vw,40svh,340px);bottom:8%}
   .vehicle--bike{transform:translateX(-80vw)}
   .vehicle--suv{transform:translateX(-90vw)}
-  .journey-card{width:min(82vw,330px);padding:1.15rem 1.15rem}
+  .journey-card{top:max(calc(var(--nav-height) + 1rem),22svh);width:min(82vw,330px);padding:1.15rem 1.15rem}
   .roads{padding:5rem 1.2rem}
-  .roads-inner{grid-template-columns:1fr;gap:2.4rem}
   .roads-grid{grid-template-columns:1fr}
-  .contact-inner{display:block}
-  .contact-art{width:100%;height:58%}
-  .contact-art-wash{background:linear-gradient(180deg,rgba(242,223,193,.05),rgba(242,223,193,.95) 78%)}
-  .contact-copy{padding:48vh 1.2rem 8vh}
+}
+
+/* Portrait phones get the full-scene mobile Red Fort painting (same media as its <source> in index.html),
+   so the cutouts become small foreground props on the grass instead of covering the fort */
+@media(max-width:700px) and (orientation:portrait){
+  .hero-cutout--taj{display:none}
+  .hero-cutout--qutub{left:5%;bottom:6%;height:17svh}
+  .hero-cutout--kedar{right:5%;bottom:6%;height:11svh}
+}
+
+/* Landscape phones / very short windows: only ~375-500px of height, so pin cards under the nav and shrink the vehicle */
+@media(orientation:landscape) and (max-height:500px){
+  .hero-copy{gap:.6rem}
+  .ride{--card-stagger:0}
+  .journey-card{top:calc(var(--nav-height) + .25rem)}
+  .vehicle{width:min(30vw,48svh);bottom:4%}
 }
 
 .calm *, .calm *::before, .calm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}

@@ -248,16 +248,28 @@
     }
   }
 
+  function setupNav() {
+    const nav = document.getElementById('site-nav');
+    const toggle = nav?.querySelector('.nav-toggle');
+    if (!toggle) return;
+
+    const setOpen = open => {
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    nav.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', e => { if (!nav.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
+    });
+    window.matchMedia('(min-width: 701px)').addEventListener('change', () => setOpen(false));
+  }
+
   function setupCoupled(section) {
     const scenes = [...section.querySelectorAll('.coupled-scene')];
-    if (scenes.length < 2 || reduceMotion) {
-      scenes.forEach((scene, i) => {
-        scene.style.position = i === 0 ? 'relative' : 'relative';
-        scene.style.opacity = '1';
-        scene.style.visibility = 'visible';
-      });
-      return;
-    }
+    if (scenes.length < 2) return;
 
     let ticking = false;
     const update = () => {
@@ -265,16 +277,24 @@
       const rect = section.getBoundingClientRect();
       const max = Math.max(1, rect.height - innerHeight);
       const p = Math.min(1, Math.max(0, -rect.top / max));
-      const fadeWindow = .16;
-      const first = p < .5 ? 1 : Math.max(0, 1 - (p - .5) / fadeWindow);
-      const second = p < .5 - fadeWindow ? 0 : Math.min(1, (p - (.5 - fadeWindow)) / fadeWindow);
+      let first;
+      let second;
+      if (reduceMotion) {
+        // Swap scenes at the midpoint without a crossfade or drift.
+        first = p < .5 ? 1 : 0;
+        second = 1 - first;
+      } else {
+        const fadeWindow = .16;
+        first = p < .5 ? 1 : Math.max(0, 1 - (p - .5) / fadeWindow);
+        second = p < .5 - fadeWindow ? 0 : Math.min(1, (p - (.5 - fadeWindow)) / fadeWindow);
+        scenes.forEach((scene, index) => {
+          scene.style.transform = `translate3d(0,${(index === 0 ? -p * 2.5 : (1 - p) * 2.5)}vh,0)`;
+        });
+      }
       scenes[0].style.opacity = String(first);
       scenes[1].style.opacity = String(second);
       scenes[0].style.visibility = first > .01 ? 'visible' : 'hidden';
       scenes[1].style.visibility = second > .01 ? 'visible' : 'hidden';
-      scenes.forEach((scene, index) => {
-        scene.style.transform = `translate3d(0,${(index === 0 ? -p * 2.5 : (1 - p) * 2.5)}vh,0)`;
-      });
     };
     const onScroll = () => {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
@@ -291,14 +311,24 @@
     const progressBar = section.querySelector('.ride-progress span');
     if (!rideStage || !vehicle) return;
 
-    if (reduceMotion) {
-      vehicle.style.transform = `translateX(28vw)`;
-      cards.forEach((card, i) => {
-        card.style.opacity = '1';
-        card.style.transform = `translate3d(0,${i * 18}vh,0)`;
-      });
-      return;
-    }
+    const cardSpecs = [
+      {start:.00, inEnd:.11, holdEnd:.28, outEnd:.36, from:-25, to:20},
+      {start:.29, inEnd:.40, holdEnd:.59, outEnd:.67, from:-23, to:22},
+      {start:.60, inEnd:.71, holdEnd:.90, outEnd:1.0, from:-22, to:24}
+    ];
+
+    // Breakpoint-dependent values come from CSS custom properties so the layout lives in one place.
+    let stagger = 0;
+    let vehicleEnd = 80;
+    let centeredX = 0;
+    const measure = () => {
+      const styles = getComputedStyle(section);
+      stagger = parseFloat(styles.getPropertyValue('--card-stagger')) || 0;
+      vehicleEnd = parseFloat(styles.getPropertyValue('--vehicle-end')) || 80;
+      // Resting x (vw) that centres a card; used as a cap so no card rests past the right edge.
+      const cardWidth = cards[0]?.offsetWidth || 0;
+      centeredX = (innerWidth - cardWidth) / 2 / Math.max(1, innerWidth) * 100;
+    };
 
     let ticking = false;
     const update = () => {
@@ -309,52 +339,49 @@
 
       // Background never moves horizontally. Only this actor layer responds to scroll.
       const vehicleStart = -32;
-      const vehicleEnd = window.innerWidth < 701 ? 68 : 80;
-      const vehicleX = vehicleStart + (vehicleEnd - vehicleStart) * p;
+      const vehicleX = reduceMotion ? 28 : vehicleStart + (vehicleEnd - vehicleStart) * p;
       vehicle.style.transform = `translate3d(${vehicleX}vw,0,0)`;
 
       if (progressBar) progressBar.style.width = `${p * 100}%`;
 
-      const cardSpecs = [
-        {start:.00, inEnd:.11, holdEnd:.28, outEnd:.36, from:-25, to:20},
-        {start:.29, inEnd:.40, holdEnd:.59, outEnd:.67, from:-23, to:22},
-        {start:.60, inEnd:.71, holdEnd:.90, outEnd:1.0, from:-22, to:24}
-      ];
-
       cards.forEach((card, i) => {
         const s = cardSpecs[i] || cardSpecs[cardSpecs.length - 1];
+        const to = Math.min(s.to, centeredX);
         let opacity = 0;
         let x = s.from;
         let y = 0;
-        if (p <= s.start) {
+        if (reduceMotion) {
+          // Show one card at a time in its resting spot, with no movement.
+          const next = cardSpecs[i + 1];
+          opacity = p >= s.start && (!next || i === cards.length - 1 || p < next.start) ? 1 : 0;
+          x = to;
+        } else if (p <= s.start) {
           opacity = 0;
           x = s.from;
           y = 22;
         } else if (p < s.inEnd) {
           const t = (p - s.start) / (s.inEnd - s.start);
           opacity = t;
-          x = s.from + (s.to - s.from) * t;
+          x = s.from + (to - s.from) * t;
           y = 22 - 22 * t;
         } else if (p < s.holdEnd) {
           opacity = 1;
-          x = s.to;
+          x = to;
           y = 0;
         } else if (p < s.outEnd) {
           const t = (p - s.holdEnd) / Math.max(.001, s.outEnd - s.holdEnd);
           opacity = 1 - t;
-          x = s.to + 25 * t;
+          x = to + 25 * t;
           y = -10 * t;
         } else {
           opacity = 0;
-          x = s.to + 25;
+          x = to + 25;
           y = -10;
         }
         card.style.opacity = opacity.toFixed(3);
         // Each card moves with the road timeline. The stage itself stays still.
-        const vertical = (i % 2 === 0 ? -1 : 1) * (window.innerWidth < 701 ? 7 : 4);
-        card.style.transform = `translate3d(calc(${x}vw), calc(${vertical + y}vh), 0)`;
-        card.style.left = '0';
-        card.style.top = '58%';
+        const vertical = (i % 2 === 0 ? -1 : 1) * stagger;
+        card.style.transform = `translate3d(${x}vw,${vertical + y}vh,0)`;
       });
     };
 
@@ -362,7 +389,8 @@
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
     };
     window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', update, {passive:true});
+    window.addEventListener('resize', () => { measure(); update(); }, {passive:true});
+    measure();
     update();
   }
 
@@ -425,6 +453,7 @@
 
   if (!document.querySelector('[data-settings-page]')) {
     if (reduceMotion) document.documentElement.classList.add('calm');
+    setupNav();
     seedParticles();
     setupHeroParallax();
     document.querySelectorAll('.coupled').forEach(setupCoupled);

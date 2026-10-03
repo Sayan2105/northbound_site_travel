@@ -13,7 +13,8 @@
   <meta property="og:description" content="Motorcycle and SUV journeys through the Himalayas and North India.">
   <meta property="og:image" content="assets/img/redfort-full.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="preload" as="image" href="assets/img/redfort-full.webp" type="image/webp">
+  <link rel="preload" as="image" href="assets/img/redfort-full.webp" type="image/webp" media="(min-width: 701px), (orientation: landscape)">
+  <link rel="preload" as="image" href="assets/img/mobile/redfort-full-phone.webp" type="image/webp" media="(max-width: 700px) and (orientation: portrait)">
   <link rel="stylesheet" href="css/styles.css">
   <script id="site-schema" type="application/ld+json">
   {
@@ -30,11 +31,12 @@
 
   <header class="nav" id="site-nav">
     <a class="brand" href="#top" data-bind="brand">Northbound</a>
-    <nav aria-label="Main navigation">
+    <nav id="site-menu" aria-label="Main navigation">
       <a href="#journey" data-bind="navDestinations">Journeys</a>
       <a href="#contact" data-bind="navStories">Contact</a>
     </nav>
     <a class="pill pill--small" href="#contact" data-bind-href="navCtaHref" data-bind="navCta">Plan a trip</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu"><span></span></button>
   </header>
 
   <main id="top">
@@ -42,7 +44,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-stage">
         <picture class="hero-bg" aria-hidden="true">
-          <source media="(max-width: 700px)" srcset="assets/img/mobile/redfort-full-phone.webp">
+          <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/redfort-full-phone.webp">
           <img src="assets/img/redfort-full.webp" alt="" width="1610" height="692" fetchpriority="high">
         </picture>
 
@@ -74,7 +76,7 @@
       <div class="coupled-stage">
         <article class="coupled-scene coupled-scene--green">
           <picture class="coupled-bg">
-            <source media="(max-width: 700px)" srcset="assets/img/mobile/green-valley-phone.webp">
+            <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/green-valley-phone.webp">
             <img src="assets/img/green-valley.webp" alt="Misty green Himalayan valley and forest road" width="1634" height="686" loading="lazy" decoding="async">
           </picture>
           <div class="scene-wash"></div>
@@ -91,7 +93,7 @@
 
         <article class="coupled-scene coupled-scene--river">
           <picture class="coupled-bg">
-            <source media="(max-width: 700px)" srcset="assets/img/mobile/rishikesh-phone.webp">
+            <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/rishikesh-phone.webp">
             <img src="assets/img/rishikesh.webp" alt="Rishikesh suspension bridge and riverfront" width="1780" height="722" loading="lazy" decoding="async">
           </picture>
           <div class="scene-wash"></div>
@@ -111,7 +113,7 @@
     <section class="ride" id="bike-ride" data-ride="bike" aria-label="Motorcycle journey through the green valley">
       <div class="ride-stage">
         <picture class="ride-bg">
-          <source media="(max-width: 700px)" srcset="assets/img/mobile/green-valley-phone.webp">
+          <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/green-valley-phone.webp">
           <img src="assets/img/green-valley.webp" alt="Green Himalayan valley used as the fixed stage for a motorcycle journey" width="1634" height="686" loading="lazy" decoding="async">
         </picture>
         <div class="ride-wash"></div>
@@ -154,7 +156,7 @@
       <div class="coupled-stage">
         <article class="coupled-scene coupled-scene--ladakh">
           <picture class="coupled-bg">
-            <source media="(max-width: 700px)" srcset="assets/img/mobile/ladakh-mountain-phone.webp">
+            <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/ladakh-mountain-phone.webp">
             <img src="assets/img/ladakh-mountain.webp" alt="High Ladakh mountain road and monastery" width="1654" height="688" loading="lazy" decoding="async">
           </picture>
           <div class="scene-wash"></div>
@@ -170,7 +172,7 @@
 
         <article class="coupled-scene coupled-scene--chandra">
           <picture class="coupled-bg">
-            <source media="(max-width: 700px)" srcset="assets/img/mobile/chandratal-phone.webp">
+            <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/chandratal-phone.webp">
             <img src="assets/img/chandratal.webp" alt="Chandratal lake under a night sky in the Himalayas" width="1734" height="706" loading="lazy" decoding="async">
           </picture>
           <div class="scene-wash"></div>
@@ -189,7 +191,7 @@
     <section class="ride ride--suv" id="suv-ride" data-ride="suv" aria-label="SUV journey through Ladakh">
       <div class="ride-stage">
         <picture class="ride-bg">
-          <source media="(max-width: 700px)" srcset="assets/img/mobile/ladakh-mountain-phone.webp">
+          <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/ladakh-mountain-phone.webp">
           <img src="assets/img/ladakh-mountain.webp" alt="Ladakh mountain landscape used as the fixed stage for an SUV journey" width="1654" height="688" loading="lazy" decoding="async">
         </picture>
         <div class="ride-wash"></div>
@@ -244,7 +246,7 @@
       <div class="contact-inner">
         <div class="contact-art" aria-hidden="true">
           <picture>
-            <source media="(max-width: 700px)" srcset="assets/img/mobile/manali-phone.webp">
+            <source media="(max-width: 700px) and (orientation: portrait)" srcset="assets/img/mobile/manali-phone.webp">
             <img src="assets/img/manali.webp" alt="" width="1782" height="724" loading="lazy" decoding="async" data-bind-src="contactDesktop">
           </picture>
           <div class="contact-art-wash"></div>
